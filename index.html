@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Controle Financeiro & Corridas</title>
+  <title>Controle Financeiro</title>
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#0f172a"/>
   <style>
@@ -44,15 +44,15 @@
 </head>
 <body>
   <header>
-    <h1>Controle Financeiro & Corridas</h1>
+    <h1>Controle Financeiro</h1>
     <div class="small">PWA • dados locais</div>
   </header>
 
   <main>
     <div class="tabs">
-      <div class="tab active" data-tab="fin">Finanças</div>
-      <div class="tab" data-tab="cor">Corridas</div>
-    </div>
+  <div class="tab active" data-tab="fin">Finanças</div>
+  <div class="tab" data-tab="rel">Relatórios</div>
+</div>
 
     <!-- FIN -->
     <section id="fin" class="card">
@@ -107,16 +107,26 @@
         </div>
       </div>
     </section>
+    
+<!-- REL -->
+<section id="rel" class="card hidden">
+  <h2>Relatórios</h2>
+  <div style="margin-bottom:16px">
+    <h3 class="small">Todos os lançamentos</h3>
+    <div id="rel-table" style="max-height:320px;overflow:auto"></div>
+  </div>
+  <div style="display:flex;gap:20px;flex-wrap:wrap">
+    <div style="flex:1;min-width:280px">
+      <h3 class="small">Gastos por categoria</h3>
+      <canvas id="rel-cat-pie"></canvas>
+    </div>
+    <div style="flex:1;min-width:280px">
+      <h3 class="small">Gastos por subcategoria</h3>
+      <canvas id="rel-subcat-pie"></canvas>
+    </div>
+  </div>
+</section>
 
-    <!-- COR -->
-    <section id="cor" class="card hidden">
-      <h2>Corridas</h2>
-      <p class="small">Seção existente mantida. (Sem alterações)</p>
-      <div style="width:340px">
-        <h3 class="small">Pie (exemplo)</h3>
-        <canvas id="cor-pie"></canvas>
-      </div>
-    </section>
   </main>
 
   <footer>Dados salvos localmente. Use Backup para exportar um JSON.</footer>
