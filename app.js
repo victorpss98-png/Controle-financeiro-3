@@ -125,16 +125,15 @@ function removeFin(id){
 }
 
 /* ---------- Render Finance ---------- */
-let finPie = null, corPie = null;
+let relCatPie = null, relSubPie = null;
 function renderFin(){
-  // Totais
   const entradas = fin.filter(r=>r.type==="Entrada").reduce((a,b)=>a+b.value,0);
   const saidas   = fin.filter(r=>r.type==="Saída").reduce((a,b)=>a+b.value,0);
   $("total-entr").textContent = fmt(entradas);
   $("total-sai").textContent  = fmt(saidas);
   $("total-saldo").textContent= fmt(entradas-saidas);
 
-  // Tabela
+  // tabela da aba Finanças
   const container = $("fin-table"); container.innerHTML="";
   if(fin.length===0){ container.innerHTML="<div class='small'>Sem lançamentos.</div>"; }
   else{
@@ -154,22 +153,7 @@ function renderFin(){
     container.appendChild(table);
   }
 
-  // Pie por CATEGORIA (Saídas), ignorando subcategorias
-  const byCat = {};
-  fin.filter(r=>r.type==="Saída").forEach(r=>{
-    byCat[r.category] = (byCat[r.category]||0)+r.value;
-  });
-  const labels = Object.keys(byCat);
-  const values = labels.map(k=>byCat[k]);
-  drawPie("fin-pie", labels, values, "finPie");
-}
-
-function drawPie(canvasId, labels, values, refName){
-  const ctx = $(canvasId).getContext("2d");
-  if(refName==="finPie" && finPie){ finPie.destroy(); }
-  if(refName==="corPie" && corPie){ corPie.destroy(); }
-  const chart = new Chart(ctx, { type:"pie", data:{ labels, datasets:[{ data: values }] }, options:{ responsive:true } });
-  if(refName==="finPie") finPie = chart; else if(refName==="corPie") corPie = chart;
+  renderRelatorios(); // sempre atualizar relatórios junto
 }
 
 /* ---------- Category Manager Modal ---------- */
