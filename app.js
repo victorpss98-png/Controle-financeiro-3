@@ -156,6 +156,50 @@ function renderFin(){
   renderRelatorios(); // sempre atualizar relatórios junto
 }
 
+/* ---------- Relatórios ---------- */
+function renderRelatorios(){
+  // Tabela relatórios
+  const container = $("rel-table"); container.innerHTML="";
+  if(fin.length===0){ container.innerHTML="<div class='small'>Sem lançamentos.</div>"; }
+  else{
+    const table = document.createElement("table");
+    table.innerHTML = "<thead><tr><th>Data</th><th>Desc</th><th>Categoria</th><th>Subcat</th><th>Tipo</th><th>Valor</th></tr></thead>";
+    const tbody = document.createElement("tbody");
+    fin.slice().reverse().forEach(r=>{
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${r.date}</td><td>${escapeHtml(r.desc)}</td><td>${escapeHtml(r.category)}</td><td>${r.subcategory?escapeHtml(r.subcategory):"-"}</td><td>${r.type}</td><td>${fmt(r.value)}</td>`;
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    container.appendChild(table);
+  }
+
+  // Gráfico categorias
+  const byCat = {};
+  fin.filter(r=>r.type==="Saída").forEach(r=>{
+    byCat[r.category] = (byCat[r.category]||0)+r.value;
+  });
+  const catLabels = Object.keys(byCat);
+  const catValues = catLabels.map(k=>byCat[k]);
+  if(relCatPie) relCatPie.destroy();
+  relCatPie = new Chart($("rel-cat-pie").getContext("2d"), {
+    type:"pie", data:{labels:catLabels,datasets:[{data:catValues}]}, options:{responsive:true}
+  });
+
+  // Gráfico subcategorias
+  const bySub = {};
+  fin.filter(r=>r.type==="Saída").forEach(r=>{
+    const key = r.subcategory || "(sem subcategoria)";
+    bySub[key] = (bySub[key]||0)+r.value;
+  });
+  const subLabels = Object.keys(bySub);
+  const subValues = subLabels.map(k=>bySub[k]);
+  if(relSubPie) relSubPie.destroy();
+  relSubPie = new Chart($("rel-subcat-pie").getContext("2d"), {
+    type:"pie", data:{labels:subLabels,datasets:[{data:subValues}]}, options:{responsive:true}
+  });
+                      }
+
 /* ---------- Category Manager Modal ---------- */
 function openCatModal(){ $("cat-modal").classList.add("show"); renderCatManager(); }
 function closeCatModal(){ $("cat-modal").classList.remove("show"); }
@@ -234,7 +278,7 @@ function renderCatManager(){
 
 function addCategory(){
   const name = $("new-cat-name").value.trim();
-  if(!name) return;
+  if(!name) return alert("Digite um nome válido.");
   if(cats.find(c=>c.name===name)) return alert("Já existe uma categoria com esse nome.");
   cats.push({name, subcats:[]});
   $("new-cat-name").value="";
