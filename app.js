@@ -282,8 +282,11 @@ function addCategory(){
   if(cats.find(c=>c.name===name)) return alert("Já existe uma categoria com esse nome.");
   cats.push({name, subcats:[]});
   $("new-cat-name").value="";
-  saveAll(); refreshCategorySelect(); renderCatManager();
+  saveAll(); 
+  refreshCategorySelect(); 
+  renderCatManager();
 }
+
 
 /* ---------- Backup / Restore ---------- */
 function exportJson(){
