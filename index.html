@@ -50,42 +50,42 @@
 
   <main>
     <!-- REL SAÍDAS -->
-<section id="rel-sai" class="card hidden">
-  <h2>Relatórios de Saídas</h2>
-  <div style="margin-bottom:16px">
-    <h3 class="small">Todos os lançamentos</h3>
-    <div id="rel-sai-table" style="max-height:320px;overflow:auto"></div>
-  </div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap">
-    <div style="flex:1;min-width:280px">
-      <h3 class="small">Saídas por categoria</h3>
-      <canvas id="rel-sai-cat"></canvas>
-    </div>
-    <div style="flex:1;min-width:280px">
-      <h3 class="small">Saídas por subcategoria</h3>
-      <canvas id="rel-sai-subcat"></canvas>
-    </div>
-  </div>
-</section>
+    <section id="rel-sai" class="card hidden">
+      <h2>Relatórios de Saídas</h2>
+      <div style="margin-bottom:16px">
+        <h3 class="small">Todos os lançamentos</h3>
+        <div id="rel-sai-table" style="max-height:320px;overflow:auto"></div>
+      </div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <h3 class="small">Saídas por categoria</h3>
+          <canvas id="rel-sai-cat"></canvas>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <h3 class="small">Saídas por subcategoria</h3>
+          <canvas id="rel-sai-subcat"></canvas>
+        </div>
+      </div>
+    </section>
 
-<!-- REL ENTRADAS -->
-<section id="rel-ent" class="card hidden">
-  <h2>Relatórios de Entradas</h2>
-  <div style="margin-bottom:16px">
-    <h3 class="small">Todos os lançamentos</h3>
-    <div id="rel-ent-table" style="max-height:320px;overflow:auto"></div>
-  </div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap">
-    <div style="flex:1;min-width:280px">
-      <h3 class="small">Entradas por categoria</h3>
-      <canvas id="rel-ent-cat"></canvas>
-    </div>
-    <div style="flex:1;min-width:280px">
-      <h3 class="small">Entradas por subcategoria</h3>
-      <canvas id="rel-ent-subcat"></canvas>
-    </div>
-  </div>
-</section>
+    <!-- REL ENTRADAS -->
+    <section id="rel-ent" class="card hidden">
+      <h2>Relatórios de Entradas</h2>
+      <div style="margin-bottom:16px">
+        <h3 class="small">Todos os lançamentos</h3>
+        <div id="rel-ent-table" style="max-height:320px;overflow:auto"></div>
+      </div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <h3 class="small">Entradas por categoria</h3>
+          <canvas id="rel-ent-cat"></canvas>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <h3 class="small">Entradas por subcategoria</h3>
+          <canvas id="rel-ent-subcat"></canvas>
+        </div>
+      </div>
+    </section>
 
     <!-- FIN -->
     <section id="fin" class="card">
@@ -140,26 +140,6 @@
         </div>
       </div>
     </section>
-    
-<!-- REL -->
-<section id="rel" class="card hidden">
-  <h2>Relatórios</h2>
-  <div style="margin-bottom:16px">
-    <h3 class="small">Todos os lançamentos</h3>
-    <div id="rel-table" style="max-height:320px;overflow:auto"></div>
-  </div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap">
-    <div style="flex:1;min-width:280px">
-      <h3 class="small">Gastos por categoria</h3>
-      <canvas id="rel-cat-pie"></canvas>
-    </div>
-    <div style="flex:1;min-width:280px">
-      <h3 class="small">Gastos por subcategoria</h3>
-      <canvas id="rel-subcat-pie"></canvas>
-    </div>
-  </div>
-</section>
-
   </main>
 
   <footer>Dados salvos localmente. Use Backup para exportar um JSON.</footer>
@@ -182,11 +162,5 @@
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="app.js"></script>
-  <div id="reports" class="tab" style="display:none;">
-    <h2>Relatórios</h2>
-    <div id="daily-summary"></div>
-    <div id="weekly-summary"></div>
-    <div id="monthly-summary"></div>
-  </div>
 </body>
 </html>
