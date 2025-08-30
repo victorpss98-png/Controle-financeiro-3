@@ -49,10 +49,43 @@
   </header>
 
   <main>
-    <div class="tabs">
-  <div class="tab active" data-tab="fin">Finanças</div>
-  <div class="tab" data-tab="rel">Relatórios</div>
-</div>
+    <!-- REL SAÍDAS -->
+<section id="rel-sai" class="card hidden">
+  <h2>Relatórios de Saídas</h2>
+  <div style="margin-bottom:16px">
+    <h3 class="small">Todos os lançamentos</h3>
+    <div id="rel-sai-table" style="max-height:320px;overflow:auto"></div>
+  </div>
+  <div style="display:flex;gap:20px;flex-wrap:wrap">
+    <div style="flex:1;min-width:280px">
+      <h3 class="small">Saídas por categoria</h3>
+      <canvas id="rel-sai-cat"></canvas>
+    </div>
+    <div style="flex:1;min-width:280px">
+      <h3 class="small">Saídas por subcategoria</h3>
+      <canvas id="rel-sai-subcat"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- REL ENTRADAS -->
+<section id="rel-ent" class="card hidden">
+  <h2>Relatórios de Entradas</h2>
+  <div style="margin-bottom:16px">
+    <h3 class="small">Todos os lançamentos</h3>
+    <div id="rel-ent-table" style="max-height:320px;overflow:auto"></div>
+  </div>
+  <div style="display:flex;gap:20px;flex-wrap:wrap">
+    <div style="flex:1;min-width:280px">
+      <h3 class="small">Entradas por categoria</h3>
+      <canvas id="rel-ent-cat"></canvas>
+    </div>
+    <div style="flex:1;min-width:280px">
+      <h3 class="small">Entradas por subcategoria</h3>
+      <canvas id="rel-ent-subcat"></canvas>
+    </div>
+  </div>
+</section>
 
     <!-- FIN -->
     <section id="fin" class="card">
