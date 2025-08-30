@@ -153,11 +153,88 @@ function renderFin(){
     container.appendChild(table);
   }
 
-  renderRelatorios(); // sempre atualizar relatórios junto
+  /* ---------- Relatórios Saídas ---------- */
+function renderRelatoriosSaidas(){
+  // tabela
+  const container = $("rel-sai-table"); container.innerHTML="";
+  const saidas = fin.filter(r=>r.type==="Saída");
+  if(saidas.length===0){ container.innerHTML="<div class='small'>Sem saídas.</div>"; }
+  else{
+    const table = document.createElement("table");
+    table.innerHTML = "<thead><tr><th>Data</th><th>Desc</th><th>Categoria</th><th>Subcat</th><th>Valor</th></tr></thead>";
+    const tbody = document.createElement("tbody");
+    saidas.slice().reverse().forEach(r=>{
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${r.date}</td><td>${escapeHtml(r.desc)}</td><td>${escapeHtml(r.category)}</td><td>${r.subcategory||"-"}</td><td>${fmt(r.value)}</td>`;
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    container.appendChild(table);
+  }
+
+  // pizza categorias
+  const byCat = {};
+  saidas.forEach(r=>{ byCat[r.category]=(byCat[r.category]||0)+r.value; });
+  if(window.relSaiCat) window.relSaiCat.destroy();
+  window.relSaiCat = new Chart($("rel-sai-cat").getContext("2d"), {
+    type:"pie", data:{labels:Object.keys(byCat),datasets:[{data:Object.values(byCat)}]}, options:{responsive:true}
+  });
+
+  // pizza subcats
+  const bySub = {};
+  saidas.forEach(r=>{
+    const key = r.subcategory || "(sem subcategoria)";
+    bySub[key]=(bySub[key]||0)+r.value;
+  });
+  if(window.relSaiSub) window.relSaiSub.destroy();
+  window.relSaiSub = new Chart($("rel-sai-subcat").getContext("2d"), {
+    type:"pie", data:{labels:Object.keys(bySub),datasets:[{data:Object.values(bySub)}]}, options:{responsive:true}
+  });
+}
+
+/* ---------- Relatórios Entradas ---------- */
+function renderRelatoriosEntradas(){
+  // tabela
+  const container = $("rel-ent-table"); container.innerHTML="";
+  const entradas = fin.filter(r=>r.type==="Entrada");
+  if(entradas.length===0){ container.innerHTML="<div class='small'>Sem entradas.</div>"; }
+  else{
+    const table = document.createElement("table");
+    table.innerHTML = "<thead><tr><th>Data</th><th>Desc</th><th>Categoria</th><th>Subcat</th><th>Valor</th></tr></thead>";
+    const tbody = document.createElement("tbody");
+    entradas.slice().reverse().forEach(r=>{
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${r.date}</td><td>${escapeHtml(r.desc)}</td><td>${escapeHtml(r.category)}</td><td>${r.subcategory||"-"}</td><td>${fmt(r.value)}</td>`;
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    container.appendChild(table);
+  }
+
+  // pizza categorias
+  const byCat = {};
+  entradas.forEach(r=>{ byCat[r.category]=(byCat[r.category]||0)+r.value; });
+  if(window.relEntCat) window.relEntCat.destroy();
+  window.relEntCat = new Chart($("rel-ent-cat").getContext("2d"), {
+    type:"pie", data:{labels:Object.keys(byCat),datasets:[{data:Object.values(byCat)}]}, options:{responsive:true}
+  });
+
+  // pizza subcats
+  const bySub = {};
+  entradas.forEach(r=>{
+    const key = r.subcategory || "(sem subcategoria)";
+    bySub[key]=(bySub[key]||0)+r.value;
+  });
+  if(window.relEntSub) window.relEntSub.destroy();
+  window.relEntSub = new Chart($("rel-ent-subcat").getContext("2d"), {
+    type:"pie", data:{labels:Object.keys(bySub),datasets:[{data:Object.values(bySub)}]}, options:{responsive:true}
+  });
 }
 
 /* ---------- Relatórios ---------- */
-function renderRelatorios(){
+renderRelatoriosSaidas();
+renderRelatoriosEntradas();
+
   // Tabela relatórios
   const container = $("rel-table"); container.innerHTML="";
   if(fin.length===0){ container.innerHTML="<div class='small'>Sem lançamentos.</div>"; }
